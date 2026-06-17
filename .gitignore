@@ -1,0 +1,30 @@
+# Virtual environment
+.venv/
+venv/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+.pytest_cache/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Project-specific
+data/raw/
+data/chroma/
+*.log
+
+# Secrets (in case you add API keys later)
+.env
+*.key
