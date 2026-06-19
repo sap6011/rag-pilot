@@ -57,10 +57,10 @@ def answer_query(query: str):
 
     return {
         "answer": response["message"]["content"],
-        "sources":[
+        "sources": [
             {
                 "source": meta.get("source"),
-                "loc": meta.get("page") or meta.get("slide") or meta.get("cell")
+                "loc": meta.get("page") or meta.get("slide") or meta.get("cell"),
                 "similarity": round(1-dist, 3),
             }
             for _, meta, dist in chunks
