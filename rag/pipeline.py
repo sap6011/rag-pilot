@@ -5,7 +5,7 @@ import ollama
 # These load once when the module is imported, not on every query
 EMBEDDER = SentenceTransformer("sentence-transformers/all-MiniLM-L6-v2")
 CLIENT = chromadb.PersistentClient(path="data/chroma")
-COLLECTION = CLIENT.get_or_create_collection("coursework")
+COLLECTION = CLIENT.get_or_create_collection("documents")
 
 SYSTEM_PROMPT = """You are a study assistant helping a university student understand their course material.
 Answer ONLY using the provided context chunks below.
@@ -35,7 +35,7 @@ def format_context(chunks):
 
     return "\n\n".join(parts)
 
-def answer_query(query: str):
+def answer_query(query: str, k: int = 5):
     """Full RAG pipeline: retrieve -> format -> generate -> return."""
     # Step 1: retrieve relevant chunks
     chunks = retrieve(query, k)
@@ -73,7 +73,7 @@ def answer_query(query: str):
 if __name__ == "__main__":
     import sys
     query = " ".join(sys.argv[1:]) or "What is the Capability Maturity Model?"
-    result = answer(query)
+    result = answer_query(query)
     print("\n=== ANSWER ===")
     print(result["answer"])
     print("\n=== SOURCES ===")
