@@ -1,0 +1,21 @@
+{"question": "What is the Capability Maturity Model?", "expected_locations": [31, 32], "ideal_answer_keywords": ["4 key process areas", "data acquisition", "Crowston", "scientific data", "lifecycle"], "category": "definition"}
+{"question": "What is the difference between data governance and data management?", "expected_locations": [17], "ideal_answer_keywords": ["governance", "management", "policies", "appropriately", "resources"], "category": "comparison"}
+{"question": "What happened in the Robodebt case?", "expected_locations": [35], "ideal_answer_keywords": ["Online Compliance Intervention", "ATO", "Centrelink", "2019", "unlawful"], "category": "case_study"}
+{"question": "What is data management?", "expected_locations": [7], "ideal_answer_keywords": ["development", "execution", "supervision", "policies", "data assets"], "category": "definition"}
+{"question": "What are the qualities of good data?", "expected_locations": [6], "ideal_answer_keywords": ["accuracy", "completeness", "consistency", "timeliness", "validity"], "category": "definition"}
+{"question": "What is the DataOne lifecycle model?", "expected_locations": [13], "ideal_answer_keywords": ["plan", "collect", "assure", "analyze", "preserve"], "category": "image_heavy"}
+{"question": "What are the stages of the CSIRO data lifecycle?", "expected_locations": [12], "ideal_answer_keywords": ["creating", "processing", "analysing", "preserving", "re-using"], "category": "image_heavy"}
+{"question": "What is the DCC data curation lifecycle model?", "expected_locations": [14], "ideal_answer_keywords": ["conceptualise", "create", "preserve", "transform", "curate"], "category": "image_heavy"}
+{"question": "What is our standard value chain in data science?", "expected_locations": [11], "ideal_answer_keywords": ["collection", "wrangling", "analysis", "presentation", "governance", "operationalisation"], "category": "definition"}
+{"question": "Who is responsible for data governance?", "expected_locations": [24, 42], "ideal_answer_keywords": ["stakeholders", "data scientist", "managers", "analysts", "IT developers"], "category": "multi_chunk"}
+{"question": "What happened in the Medibank data breach?", "expected_locations": [40], "ideal_answer_keywords": ["October 2022", "health insurer", "hackers", "ransom", "dark web"], "category": "case_study"}
+{"question": "What happened in the Optus data breach?", "expected_locations": [41], "ideal_answer_keywords": ["September 2022", "10 million", "passport", "telecommunications", "personal data"], "category": "case_study"}
+{"question": "What went wrong with the British COVID test-and-trace program?", "expected_locations": [36], "ideal_answer_keywords": ["Excel", "16,000", "infections", "unreported", "contacts"], "category": "case_study"}
+{"question": "What are the learning outcomes for week 10?", "expected_locations": [3], "ideal_answer_keywords": ["data lifecycle", "data value chain", "data governance", "ethics", "privacy"], "category": "definition"}
+{"question": "What is the difference between privacy, confidentiality and security?", "expected_locations": [22], "ideal_answer_keywords": ["privacy", "confidentiality", "security", "control", "protection"], "category": "comparison"}
+{"question": "What legal and ethical responsibilities apply to data?", "expected_locations": [18], "ideal_answer_keywords": ["Australian Privacy", "GDPR", "ARC", "NHMRC", "ethical"], "category": "definition"}
+{"question": "What should a Data Management Plan contain?", "expected_locations": [29], "ideal_answer_keywords": ["backups", "metadata", "storage", "responsibilities", "budget"], "category": "definition"}
+{"question": "What is the BUPA data leak about?", "expected_locations": [37], "ideal_answer_keywords": ["2015", "visa", "Excel", "typo", "subcontractor"], "category": "case_study"}
+{"question": "What happened in the 2016 ABS Census?", "expected_locations": [38, 39], "ideal_answer_keywords": ["IBM", "online", "cyber attacks", "shutdown", "30 million"], "category": "case_study"}
+{"question": "What is logistic regression?", "expected_locations": [], "ideal_answer_keywords": [], "category": "out_of_scope"}
+{"question": "How do I train a neural network?", "expected_locations": [], "ideal_answer_keywords": [], "category": "out_of_scope"}
