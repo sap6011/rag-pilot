@@ -81,20 +81,14 @@ Cost: ingestion goes from ~5s to ~90s for a 42-page PDF (one-time). Query latenc
 
 Result: image_heavy answer coverage 6.67% → 93.33%.
 
-### The multi_chunk story
-
-The "regression" from 40% → 20% on the one multi_chunk question turned out not to be a regression at all — the answer was correct ("all stakeholders are responsible, the data scientist is key") but the keywords list demanded enumeration of specific roles (managers, analysts, IT developers) that the model didn't bother to list. The underlying retrieval problem (page 24 with the actual stakeholder list ranks 4th out of 5 because shorter title slides outrank it) was already present in the baseline and is the next planned improvement.
-
-**Lesson:** Always inspect per-question JSON before drawing conclusions from aggregate moves.
-
 ## What's next
 
-- [ ] **Title-slide ranking fix** — merge title-only slides with the following content slide during chunking. Should lift definition MRR and the multi_chunk question.
-- [ ] **Hybrid search (BM25 + vector with RRF fusion)** — biggest expected win for proper-noun queries.
-- [ ] **Cross-encoder reranker** — bge-reranker-v2-m3 over top-20 candidates.
-- [ ] **FastAPI endpoint** — `/query` and `/ingest` HTTP wrappers.
-- [ ] **LangChain rebuild** — same system, same eval, framework version.
-- [ ] **LangGraph extension** — turn it into a stateful agent that can ask clarifying questions, decide whether to retrieve, and chain multi-step lookups.
+- [ ] **Title-slide ranking fix** - merge title-only slides with the following content slide during chunking. Should lift definition MRR and the multi_chunk question.
+- [ ] **Hybrid search (BM25 + vector with RRF fusion)** - biggest expected win for proper-noun queries.
+- [ ] **Cross-encoder reranker** - bge-reranker-v2-m3 over top-20 candidates.
+- [ ] **FastAPI endpoint** - `/query` and `/ingest` HTTP wrappers.
+- [ ] **LangChain rebuild** - same system, same eval, framework version.
+- [ ] **LangGraph extension** - turn it into a stateful agent that can ask clarifying questions, decide whether to retrieve, and chain multi-step lookups.
 
 ## How to run
 
