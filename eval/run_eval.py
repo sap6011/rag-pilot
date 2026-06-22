@@ -29,7 +29,9 @@ def chunk_location(meta: dict) -> int | None:
 
 def evaluate_retrieval(chunks, expected_locations: list[int]):
     """
-    Given retrieved chunks and expected page numbers, return:
+    Given, retrieved chunks and expected page numbers
+    
+    Returns:
       - hit:  did at least one retrieved chunk match an expected location?
       - rank: 1-based position of the first matching chunk (None if no hit)
     """
