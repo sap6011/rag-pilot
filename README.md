@@ -75,7 +75,7 @@ Breakdown by category (keyword coverage):
 
 The baseline eval showed image-heavy slides (diagrams) had 100% retrieval recall but only 6.67% answer coverage. Diagnosis: pypdf extracts the slide *title* but not the content *inside* the diagram. The vector match was matching titles, but the answer had nothing real to say.
 
-Fix: during ingestion, for any page with <200 chars of extracted text, render the page and ask `qwen3-vl:4b` to caption it. Append the caption to the page text. The rest of the pipeline (chunking, embedding, retrieval, generation) is unchanged — the new text is just text.
+Fix: during ingestion, for any page with <200 chars of extracted text, render the page and ask `qwen3-vl:4b` to caption it. Append the caption to the page text. The rest of the pipeline (chunking, embedding, retrieval, generation) is unchanged.
 
 Cost: ingestion goes from ~5s to ~90s for a 42-page PDF (one-time). Query latency is unaffected.
 
