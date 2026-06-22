@@ -1,54 +1,38 @@
 # rag-pilot
 
-A from-scratch Retrieval-Augmented Generation system built over university coursework notes (PDFs, pptx, docx, ipynb, Rmd). Built to learn production RAG mechanics by measurement-driven iteration — every improvement is justified by an eval metric, not vibes.
+A from-scratch Retrieval-Augmented Generation system built over university coursework notes (PDFs, pptx, docx, ipynb, Rmd). Built to learn production RAG mechanics by measurement-driven iteration. Every improvement is justified by an eval metric.
 
 ## Why from scratch
 
-Most RAG tutorials start with LangChain or LlamaIndex and end with a working chatbot. The problem: you learn the framework's API, not what it's actually doing. This project deliberately builds the same system three times:
+Most RAG tutorials start with LangChain or LlamaIndex and end with a working chatbot. The problem is you learn the framework's API but not what it's actually doing. In this project, I deliberately build the same system three times:
 
-1. **Phase 1-3:** Raw Python. No framework. Loaders, chunker, embedder, vector store, retrieval, and generation written by hand.
-2. **Phase 4 (planned):** Rebuild in LangChain. See what the framework saves you and where it constrains you.
+1. **Phase 1-3:** Raw Python. No framework. Loaders, chunker, embedder, vector store, retrieval and generation coded manually.
+2. **Phase 4 (planned):** Rebuild in LangChain. See how the framework helps and where are the constrains.
 3. **Phase 5 (planned):** Extend into a stateful agent with LangGraph.
 
-The point is to understand *what frameworks abstract* before adopting them.
+The point was to understand the *abstractions of the framework* before adopting them.
 
 ## Architecture
 
 PDF / pptx / docx / ipynb / Rmd
-
 ↓
-
 loaders.py        (format-specific text extraction + metadata)
-
 ↓
-
 vlm_captioner.py  (qwen3-vl:4b captions image-heavy pages)
-
 ↓
-
 chunker.py        (recursive 800-char splits, 100-char overlap)
-
 ↓
-
 sentence-transformers/all-MiniLM-L6-v2  (384-dim embeddings)
-
 ↓
-
 ChromaDB          (HNSW vector index, persisted to disk)
-
 ↓
-
 retriever         (top-k cosine similarity)
-
 ↓
-
 llama3.2:3b       (grounded answer generation via Ollama)
-
 ↓
-
 answer + cited sources
 
-Two LLMs, two roles: a small text model (`llama3.2:3b`) for answering, a small vision model (`qwen3-vl:4b`) for one-time captioning of diagrams during ingestion. The embedder is a third specialized model. Each component does one thing.
+Two LLMs and two roles: a small text model (`llama3.2:3b`) for answering and a small vision model (`qwen3-vl:4b`) for one-time captioning of diagrams during ingestion. The embedder is a third specialized model. Each component does its own thing.
 
 ## Results
 
@@ -67,9 +51,9 @@ Breakdown by category (keyword coverage):
 | case_study    | 67%      | 83%            |       |
 | comparison    | 100%     | 100%           |       |
 | definition    | 80%      | 74%            |       |
-| image_heavy   | **7%**   | **93%**        | Targeted fix — 14x improvement |
+| image_heavy   | **7%**   | **93%**        | Targeted fix: 14x improvement |
 | multi_chunk   | 40%      | 20%            | Known issue: title slides outrank content slides |
-| out_of_scope  | 100% (refusal) | 100% (refusal) | Refusal accuracy |
+| out_of_scope  | 100% (refusal) | 100% (refusal) | Refusal accuracy is 10% |
 
 ### Story behind the image_heavy fix
 
