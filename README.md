@@ -15,21 +15,37 @@ The point was to understand the *abstractions of the framework* before adopting 
 ## Architecture
 
 PDF / pptx / docx / ipynb / Rmd
+
 ↓
+
 loaders.py        (format-specific text extraction + metadata)
+
 ↓
+
 vlm_captioner.py  (qwen3-vl:4b captions image-heavy pages)
+
 ↓
+
 chunker.py        (recursive 800-char splits, 100-char overlap)
+
 ↓
+
 sentence-transformers/all-MiniLM-L6-v2  (384-dim embeddings)
+
 ↓
+
 ChromaDB          (HNSW vector index, persisted to disk)
+
 ↓
+
 retriever         (top-k cosine similarity)
+
 ↓
+
 llama3.2:3b       (grounded answer generation via Ollama)
+
 ↓
+
 answer + cited sources
 
 Two LLMs and two roles: a small text model (`llama3.2:3b`) for answering and a small vision model (`qwen3-vl:4b`) for one-time captioning of diagrams during ingestion. The embedder is a third specialized model. Each component does its own thing.
@@ -120,22 +136,39 @@ python -m eval.compare_runs
 ## Project structure
 
 rag-pilot/
+
 ├── ingest/
+
 │   ├── loaders.py         # per-format text extraction
+
 │   ├── chunker.py         # recursive character splitter
+
 │   ├── vlm_captioner.py   # qwen3-vl captioning for image-heavy pages
+
 │   └── ingest.py          # orchestrates ingestion
+
 ├── rag/
+
 │   └── pipeline.py        # retrieve → format context → generate
+
 ├── eval/
+
 │   ├── testset.jsonl      # 21 test cases across 6 categories
+
 │   ├── run_eval.py        # measures recall@k, MRR, keyword coverage, refusal
+
 │   ├── compare_runs.py    # diff the two most recent runs
+
 │   └── runs/              # versioned per-run JSON snapshots (gitignored)
+
 ├── api/                   # FastAPI (planned)
+
 ├── data/
+
 │   ├── raw/               # source files (gitignored)
+
 │   └── chroma/            # vector store (gitignored)
+
 └── README.md
 
 ## Design principles
