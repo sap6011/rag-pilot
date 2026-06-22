@@ -142,9 +142,33 @@ def run_evaluation(testset_path: str = "eval/testset.jsonl", k=5):
     print(f"  MRR: {mrr:.3f}")
     print(f"  Keyword coverage: {sum(covs)/len(covs):.2%}" if covs else "  Keyword coverage: n/a")
 
-    # Save full results
-    out_path = Path("eval/last_run.json")
-    out_path.write_text(json.dumps(results, indent=2))
+    # Save versioned results
+    from datetime import datetime
+    runs_dir = Path("eval/runs")
+    runs_dir.mkdir(parents=True, exist_ok=True)
+
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    out_path = runs_dir / f"run_{timestamp}.json"
+
+    # Build a meta block describing the config that produced these results
+    meta = {
+        "timestamp": datetime.now().isoformat(),
+        "k": k,
+        "testset_path": testset_path,
+        "n_questions": len(results),
+        "model": "llama3.2:3b",
+        "embedder": "sentence-transformers/all-MiniLM-L6-v2",
+        "chunk_size": 800,
+        "chunk_overlap": 100,
+        "summary": {
+            "recall_at_k": round(hits / len(in_scope), 3) if in_scope else None,
+            "mrr": round(mrr, 3),
+            "keyword_coverage": round(sum(covs) / len(covs), 3) if covs else None,
+        },
+    }
+
+    payload = {"meta": meta, "results": results}
+    out_path.write_text(json.dumps(payload, indent=2))
     print(f"\nFull results saved to {out_path}")
 
 if __name__ == "__main__":
