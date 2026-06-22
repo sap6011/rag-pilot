@@ -6,12 +6,36 @@ import nbformat
 
 
 def load_pdf(path: Path):
-    """One entry per page."""
+    """
+    One entry per page. For image-heavy pages (sparse text layer), we render
+    the page and ask a VLM to caption it, appending the caption to the text.
+    """
+    from ingest.vlm_captioner import render_pdf_pages, needs_captioning, caption_image
+
     reader = PdfReader(path)
-    return [
-        (page.extract_text() or "", {"source": path.name, "page": i + 1, "type": "pdf"})
-        for i, page in enumerate(reader.pages)
-    ]
+
+    # Lazy render: only render pages if any page needs captioning
+    rendered_pages = None
+
+    results = []
+    for i, page in enumerate(reader.pages):
+        text = page.extract_text() or ""
+        meta = {"source": path.name, "page": i + 1, "type": "pdf"}
+
+        if needs_captioning(text):
+            # First time we need a caption — render all pages now
+            if rendered_pages is None:
+                print(f"  Rendering {path.name} for VLM captioning...")
+                rendered_pages = render_pdf_pages(path)
+
+            print(f"  Captioning page {i + 1}...")
+            caption = caption_image(rendered_pages[i])
+            if caption:
+                text = f"{text}\n\n[Visual content]: {caption}"
+
+        results.append((text, meta))
+
+    return results
 
 
 def load_pptx(path: Path):
