@@ -1,6 +1,6 @@
 # rag-pilot
 
-A from-scratch Retrieval-Augmented Generation system built over university coursework notes (PDFs, pptx, docx, ipynb, Rmd). Built to learn production RAG mechanics by measurement-driven iteration. Every improvement is justified by an eval metric.
+A from-scratch Retrieval Augmented Generation system built over university coursework notes (PDFs, pptx, docx, ipynb, Rmd). Built to learn production RAG mechanics by measurement-driven iteration. Every improvement is justified by an eval metric.
 
 ## Why from scratch
 
